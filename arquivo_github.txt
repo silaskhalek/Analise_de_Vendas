@@ -1,0 +1,31 @@
+Region,Model,Sales,Month
+North,Sedan,120,2024-01
+South,SUV,150,2024-01
+East,Sedan,100,2024-01
+West,SUV,130,2024-01
+North,Truck,110,2024-02
+South,Truck,90,2024-02
+East,SUV,140,2024-02
+West,Sedan,80,2024-02
+
+
+import pandas as pd
+
+# Carrega os dados
+df = pd.read_csv("vendas.csv")
+
+# Total por modelo
+print("📊 Vendas por Modelo:")
+print(df.groupby("Model")["Sales"].sum(), end="\n\n")
+
+# Total por região
+print("🌎 Vendas por Região:")
+print(df.groupby("Region")["Sales"].sum(), end="\n\n")
+
+# Mês com mais vendas
+mes_mais_vendas = df.groupby("Month")["Sales"].sum().idxmax()
+print(f"🗓️ Mês com mais vendas: {mes_mais_vendas}\n")
+
+# Modelo mais vendido
+modelo_top = df.groupby("Model")["Sales"].sum().idxmax()
+print(f"🚗 Modelo mais vendido: {modelo_top}")
